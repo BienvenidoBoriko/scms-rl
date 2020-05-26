@@ -36,19 +36,19 @@ class UserController extends Controller
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'profile_img'=>['required', 'string'],
-            'cover_img'=>['required', 'string'],
-            'bio'=>['required', 'string', 'max:255'],
-            'github'=>['string', 'max:70'],
-            'website'=>['string', 'max:100'],
-            'twitter'=>['string', 'max:50'],
-            'slug'=>['required', 'string', 'max:50'],
-            'rol_id'=>['required', 'integer'],
-            'meta_title'=>['required', 'string'],
-            'meta_desc'=>['required', 'string'],
-            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
-            'password' => ['required', 'string', 'min:8'],
+            'name' => 'required|string|max:255',
+            'profile_img'=>'required|string',
+            'cover_img'=>'required|string',
+            'bio'=>'required|string|max:255',
+            'github'=>'string|max:70',
+            'website'=>'string|max:100',
+            'twitter'=>'string|max:50',
+            'slug'=>'required|string|max:50',
+            'rol_id'=>'required|integer',
+            'meta_title'=>'required|string',
+            'meta_desc'=>'required|string',
+            'email' => 'required|string|email|max:50|unique:users',
+            'password' => 'required|string|min:8',
         ]);
 
         if ($validator->fails()) {
@@ -81,7 +81,29 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $user->update($request->all());
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'profile_img'=>'required|string',
+            'cover_img'=>'required|string',
+            'bio'=>'required|string|max:255',
+            'github'=>'string|max:70',
+            'website'=>'string|max:100',
+            'twitter'=>'string|max:50',
+            'slug'=>'required|string|max:50',
+            'rol_id'=>'required|integer',
+            'meta_title'=>'required|string',
+            'meta_desc'=>'required|string',
+            'email' => 'required|string|email|max:50|unique:users',
+            'password' => 'required|string|min:8',
+        ]);
+
+        if ($validator->fails()) {
+            return response(['error' => $validator->errors(), 'Validation Error']);
+        }
+
+        $user->update($data);
 
         return response([ 'user' => new ApiResource($user), 'message' => 'Retrieved successfully'], 200);
     }

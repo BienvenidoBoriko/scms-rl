@@ -63,7 +63,7 @@ class SettingController extends Controller
             'title' => $request->input('title'),
             'desc' => $request->input('desc'),
             'lang' => $request->input('lang'),
-            'cover_image' => $request->input('cover_image'),
+            'cover_img' => $request->input('cover_img'),
             'facebook' => $request->input('facebook'),
             'twitter' => $request->input('twitter'),
             'email' => $request->input('email'),

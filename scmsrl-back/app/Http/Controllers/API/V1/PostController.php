@@ -37,7 +37,7 @@ class PostController extends Controller
 
         $validator = Validator::make($data, [
             'title' => ['required','string','max:200'],
-           // 'status' => ['required','string',Rule::in(['publiced,draff']),'max:10'],//draff como borrador
+            'status' => ['required','string',Rule::in(['publiced,draff']),'max:10'],//draff como borrador
             'author_id' => ['required','integer','max:20'],
             'published_at'=>['nullable','date'],
             'html' => ['required','string'],

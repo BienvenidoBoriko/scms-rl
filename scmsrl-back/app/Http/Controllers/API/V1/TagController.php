@@ -39,12 +39,12 @@ class TagController extends Controller
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'name' => ['required','string','max:30'],
-            'description' => ['required','string','max:250'],
-            'featured_img' => ['image', 'mimes:png,jpg,jpeg,bmp','required'],
-            'slug' => ['required','string','max:30'],
-            'meta_title' => ['required','string','max:70'],
-            'meta_desc' => ['required','string','max:200'],
+            'name' => 'required|string|max:30',
+            'description' => 'required|string|max:250',
+            'featured_img' => 'image|mimes:png,jpg,jpeg,bmp|required',
+            'slug' => 'required|string|max:30',
+            'meta_title' => 'required|string|max:70',
+            'meta_desc' => 'required|string|max:200',
         ]);
 
         if ($validator->fails()) {
@@ -80,6 +80,19 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:30',
+            'description' => 'required|string|max:250',
+            'featured_img' => 'image|mimes:png,jpg,jpeg,bmp|required',
+            'slug' => 'required|string|max:30',
+            'meta_title' => 'required|string|max:70',
+            'meta_desc' => 'required|string|max:200',
+        ]);
+
+        if ($validator->fails()) {
+            return response(['error' => $validator->errors(), 'Validation Error']);
+        }
+
         $tag->update($request->all());
 
         return response([ 'tag' => new ApiResource($tag), 'message' => 'Retrieved successfully'], 200);
