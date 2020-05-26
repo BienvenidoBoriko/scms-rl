@@ -20,6 +20,7 @@ class SettingController extends Controller
     public function index()
     {
         return view('setting.index', ['title'=>Setting::where('name', 'title')->first(),
+        'cover_img'=>Setting::where('name', 'cover_img')->first(),
         'desc'=>Setting::where('name', 'desc')->first(),'lang'=>Setting::where('name', 'lang')->first(),
         'facebook'=>Setting::where('name', 'facebook')->first(),'twitter'=>Setting::where('name', 'twitter')->first(),
         'email'=>Setting::where('name', 'email')->first(),'github'=>Setting::where('name', 'github')->first()
@@ -50,45 +51,25 @@ class SettingController extends Controller
             'title' => ['required','string','max:200'],
             'desc' => ['required','string','max:250'],
             'lang' => ['required','string','max:10'],
-            'cover_img' => ['image', 'mimes:png,jpg,jpeg,bmp','nullable'],
+            'cover_img' => ['required','string'],
             'facebook' => ['required','string','max:200'],
             'twitter' => ['required','string','max:200'],
             'email' => ['required','string','max:200'],
             'github' => ['required','string','max:200']
         ]);
 
-        if (!empty($request->file('cover_img'))) {
-            $extension = $request->file('cover_img')->extension();
-
-            Storage::deleteDirectory('public/uploads/header-img');
-            $request->file('cover_img')->storeAs(
-                'public/uploads/header-img',
-                'header-img.'.$extension
-            );
-            $pathCoverImg = 'storage/uploads/header-img.'.$extension;
-            $data = [
+        $data = [
 
             'title' => $request->input('title'),
             'desc' => $request->input('desc'),
             'lang' => $request->input('lang'),
-            'cover_image' => $pathCoverImg,
+            'cover_image' => $request->input('cover_image'),
             'facebook' => $request->input('facebook'),
             'twitter' => $request->input('twitter'),
             'email' => $request->input('email'),
             'github' => $request->input('github'),
         ];
-        } else {
-            $data = [
 
-            'title' => $request->input('title'),
-            'desc' => $request->input('desc'),
-            'lang' => $request->input('lang'),
-            'facebook' => $request->input('facebook'),
-            'twitter' => $request->input('twitter'),
-            'email' => $request->input('email'),
-            'github' => $request->input('github'),
-        ];
-        }
 
 
         foreach ($data as $name => $value) {

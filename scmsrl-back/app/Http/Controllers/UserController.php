@@ -58,8 +58,8 @@ class UserController extends Controller
         $this->authorize('create', User::class);
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
-            'profile_img'=>['required', 'image','mimes:png,jpg,jpeg,bmp'],
-            'cover_img'=>['required', 'image', 'mimes:png,jpg,jpeg,bmp'],
+            'profile_img'=>['required', 'string'],
+            'cover_img'=>['required', 'string'],
             'bio'=>['required', 'string', 'max:255'],
             'github'=>['string', 'max:70'],
             'website'=>['string', 'max:100'],
@@ -72,27 +72,12 @@ class UserController extends Controller
             'password' => ['required', 'string', 'min:8'],
         ]);
 
-        $tiempo=time();
-        $request->file('profile_img')->storeAs(
-            'public/uploads/',
-            $tiempo . trim($request->file('profile_img')->getClientOriginalName())
-        );
-
-        $pathProfileImg = 'storage/uploads/'. $tiempo . trim($request->file('profile_img')->getClientOriginalName());
-
-        $request->file('cover_img')->storeAs(
-            'public/uploads/',
-            $tiempo . trim($request->file('cover_img')->getClientOriginalName())
-        );
-
-        $pathCovImg = "storage/uploads/". $tiempo . trim($request->file('cover_img')->getClientOriginalName());
-
 
         $user= User::create([
                 'name' => $request['name'],
                 'status'=>'ofline',
-                'profile_img'=>$pathProfileImg,
-                'cover_img'=>$pathCovImg,
+                'profile_img'=>$request['profile_img'],
+                'cover_img'=>$request['cover_img'],
                 'bio'=>$request['bio'],
                 'github'=>$request['github'],
                 'website'=>$request['website'],
@@ -149,8 +134,8 @@ class UserController extends Controller
 
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
-            'profile_img'=>['required', 'image','mimes:png,jpg,jpeg,bmp'],
-            'cover_img'=>['required', 'image', 'mimes:png,jpg,jpeg,bmp'],
+            'profile_img'=>['required', 'string'],
+            'cover_img'=>['required', 'string'],
             'bio'=>['required', 'string', 'max:255'],
             'github'=>['string', 'max:70'],
             'website'=>['string', 'max:100'],
@@ -164,32 +149,11 @@ class UserController extends Controller
         ]);
 
 
-
-        $tiempo=time();
-        $request->file('profile_img')->storeAs(
-            'public/uploads/',
-            $tiempo . trim($request->file('profile_img')->getClientOriginalName())
-        );
-
-        $pathProfileImg = 'storage/uploads/'. $tiempo . trim($request->file('profile_img')->getClientOriginalName());
-
-        $request->file('cover_img')->storeAs(
-            'public/uploads/',
-            $tiempo . trim($request->file('cover_img')->getClientOriginalName())
-        );
-
-        $pathCovImg = "storage/uploads/". $tiempo . trim($request->file('cover_img')->getClientOriginalName());
-
-        $oldImg=\explode('/', $user->profile_img)[2];
-        Storage::delete('public/uploads/'.$oldImg);
-        $oldImg=\explode('/', $user->cover_img)[2];
-        Storage::delete('public/uploads/'.$oldImg);
-
         $data=([
                 'name' => $request['name'],
                 'status'=>'ofline',
-                'profile_img'=>$pathProfileImg,
-                'cover_img'=>$pathCovImg,
+                'profile_img'=>$request['profile_img'],
+                'cover_img'=>$request['cover_img'],
                 'bio'=>$request['bio'],
                 'github'=>$request['github'],
                 'website'=>$request['website'],

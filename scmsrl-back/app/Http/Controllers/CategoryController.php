@@ -48,27 +48,18 @@ class CategoryController extends Controller
         $this->validate($request, [
             'name' => ['required','string','max:30'],
             'description' => ['required','string','max:250'],
-            'featured_img' => ['image', 'mimes:png,jpg,jpeg,bmp','required'],
+            'featured_img' => ['required','string'],
             'slug' => ['required','string','max:30'],
             'meta_title' => ['required','string','max:70'],
             'meta_desc' => ['required','string','max:200'],
             'visibility'=>['required','string']
         ]);
-        if (!empty($request->file('featured_img'))) {
-            $tiempo=time();
-            $request->file('featured_img')->storeAs(
-                'public/uploads/',
-                $tiempo .  \trim($request->file('featured_img')->getClientOriginalName())
-            );
-            $pathFeaturedImg = 'storage/uploads/'. $tiempo .\trim($request->file('featured_img')->getClientOriginalName());
-        } else {
-            $pathFeaturedImg=$post->featured_img;
-        }
+
         $data = [
 
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'featured_img' => $pathFeaturedImg,
+            'featured_img' => $request->input('featured_img'),
             'slug' => $request->input('slug'),
             'visibility'=>$request->input('visibility'),
             'meta_title' => $request->input('meta_title'),
@@ -114,23 +105,18 @@ class CategoryController extends Controller
         $this->validate($request, [
             'name' => ['required','string','max:30'],
             'description' => ['required','string','max:250'],
-            'featured_img' => ['image', 'mimes:png,jpg,jpeg,bmp','required'],
+            'featured_img' => ['required','string'],
             'slug' => ['required','string','max:30'],
             'meta_title' => ['required','string','max:70'],
             'meta_desc' => ['required','string','max:200'],
             'visibility'=>['required',Rule::in(['true','false'])]
         ]);
-        $tiempo=time();
-        $request->file('featured_img')->storeAs(
-            'public/uploads/',
-            $tiempo .  \trim($request->file('featured_img')->getClientOriginalName())
-        );
-        $pathFeaturedImg = 'storage/uploads/'. $tiempo .\trim($request->file('featured_img')->getClientOriginalName());
+
         $data = [
 
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'featured_img' => $pathFeaturedImg,
+            'featured_img' => $request->input('featured_img'),
             'slug' => $request->input('slug'),
             'visibility'=>$request->input('visibility'),
             'meta_title' => $request->input('meta_title'),

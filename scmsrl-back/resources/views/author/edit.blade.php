@@ -71,13 +71,39 @@
         </div>
         <div class="form-group">
             <div class="form-row">
-                <div class="col"><input class="custom-file-input @error('profile_img') is-invalid @enderror" id="profile_img" name="profile_img" type="file">
-                    <label class="custom-file-label" for="profile_img">Imagen de usuario</label>
-                <x-error-message name="profile_img"/>
+                <div class="col">
+                    <fieldset class="p-2">
+                        <legend class="h6">imagen de Usuario</legend>
+                        <div class="form-row">
+                            <div class="col-md-4 pr-0">
+                                <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                    <i class="fa fa-picture-o"></i> Cargar
+                                </a>
+                            </div>
+                            <div class="col-md-8 pl-0">
+                                <input id="thumbnail" class="form-control @error('profile_img') is-invalid @enderror" type="text" value="{{ $author->profile_img }}" name="profile_img">
+                                <x-error-message name="profile_img" />
+                            </div>
+                        </div>
+                        <img id="holder" style="margin-top:15px;max-height:100px;">
+                    </fieldset>
                 </div>
-                <div class="col"><input class="custom-file-input @error('cover_img') is-invalid @enderror" id="cover_img" name="cover_img" type="file">
-                    <label class="custom-file-label" for="cover_img">Imagen de cabecera</label>
-                <x-error-message name="cover_img"/>
+                <div class="col">
+                    <fieldset class="p-2">
+                        <legend class="h6">imagen de cabecera</legend>
+                        <div class="form-row">
+                            <div class="col-md-4 pr-0">
+                                <a id="lfm2" data-input="thumbnail2" data-preview="holder2" class="btn btn-primary">
+                                    <i class="fa fa-picture-o"></i> Cargar
+                                </a>
+                            </div>
+                            <div class="col-md-8 pl-0">
+                                <input id="thumbnail2" class="form-control @error('cover_img') is-invalid @enderror" type="text" value="{{ $author->cover_img }}" name="cover_img">
+                                <x-error-message name="cover_img" />
+                            </div>
+                        </div>
+                        <img id="holder2" style="margin-top:15px;max-height:100px;">
+                    </fieldset>
                 </div>
             </div>
         </div><button class="btn btn-primary mr-5" type="submit">Guardar</button><button

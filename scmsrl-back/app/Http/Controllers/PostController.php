@@ -56,7 +56,7 @@ class PostController extends Controller
             'published_at'=>['nullable','date'],
             'html' => ['required','string'],
             'plain_text' => ['string','nullable'],
-            'featured_img' => ['image', 'mimes:png,jpg,jpeg,bmp','required'],
+            'featured_img' => ['required','string'],
             'featured' => ['required','boolean'],
             'meta_title'=>['required', 'string'],
             'meta_desc'=>['required', 'string'],
@@ -72,13 +72,6 @@ class PostController extends Controller
                 $publicationDate=null;
             }
 
-            $tiempo=time();
-            $request->file('featured_img')->storeAs(
-                'public/uploads/',
-                $tiempo .  \trim($request->file('featured_img')->getClientOriginalName())
-            );
-            $pathFeaturedImg = 'storage/uploads/'. $tiempo .\trim($request->file('featured_img')->getClientOriginalName());
-
             $data = [
 
             'title' => $request->input('title'),
@@ -86,7 +79,7 @@ class PostController extends Controller
             'published_at' => $publicationDate,
             'plain_text' => $request->input('plain_text'),
             'html' => $request->input('html'),
-            'featured_img' => $pathFeaturedImg,
+            'featured_img' => $request->input('featured_img'),
             'slug' => $request->input('slug'),
             'user_id' => $request->input('author_id'),
             'featured' => $request->input('featured'),
@@ -151,7 +144,7 @@ class PostController extends Controller
             'author_id' => ['required','integer','max:20'],
             'plain_text' => ['string','nullable'],
             'html' => ['required','string'],
-            'featured_img' => ['image', 'mimes:png,jpg,jpeg,bmp'],
+            'featured_img' => ['required','string'],
             'featured' => ['required','boolean'],
             'meta_title'=>['required', 'string'],
             'meta_desc'=>['required', 'string'],
@@ -161,23 +154,13 @@ class PostController extends Controller
             'category_id' => ['required','string','nullable']
         ]);
 
-        if (!empty($request->file('featured_img'))) {
-            $tiempo=time();
-            $request->file('featured_img')->storeAs(
-                'public/uploads/',
-                $tiempo.\trim($request->file('featured_img')->getClientOriginalName())
-            );
-            $pathFeaturedImg = 'storage/uploads/'. $tiempo .\trim($request->file('featured_img')->getClientOriginalName());
-        } else {
-            $pathFeaturedImg=$post->featured_img;
-        }
         $data = [
 
             'title' => $request->input('title'),
             'status' => $request->input('status'),
             'plain_text' => $request->input('plain_text'),
             'html' => $request->input('html'),
-            'featured_img' => $pathFeaturedImg,
+            'featured_img' => $request->input('featured_img'),
             'slug' => $request->input('slug'),
             'user_id' => $request->input('author_id'),
             'featured' => $request->input('featured'),
@@ -186,12 +169,6 @@ class PostController extends Controller
             'category_id' => $request->input('category_id'),
         ];
 
-        /*if ($request->hasFile('cover_image')) {
-            $data['cover_image'] = $this->uploadOne($request->file('cover_image'));
-        }*/
-
-        $oldImg=\explode('/', $post->featured_img)[2];
-        Storage::delete('public/uploads/'.$oldImg);
         $post->update($data);
 
         /* if ($request->has('category')) {
@@ -243,26 +220,6 @@ class PostController extends Controller
         $post->save();
 
         return redirect()->route('post.index')->with('success', 'Estado cambiado correctamente');
-    }
-
-    public function upload(Request $request)
-    {
-        $this->authorize('upload', Post::class);
-        $this->validate($request, ['upload' => ['required','image'], ]);
-        $tiempo=time();
-        $request->file('upload')->storeAs(
-            'public/uploads/',
-            $tiempo .  \trim($request->file('upload')->getClientOriginalName())
-        );
-        $path = 'storage/uploads/'. $tiempo .\trim($request->file('upload')->getClientOriginalName());
-        $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-        $url = asset($path);
-        $msg = 'Image successfully uploaded';
-        $re = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
-
-        // Render HTML output
-        @header('Content-type: text/html; charset=utf-8');
-        echo $re;
     }
 
     /**

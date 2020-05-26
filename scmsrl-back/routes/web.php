@@ -16,12 +16,16 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
+    Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web']], function () {
+        \UniSharp\LaravelFilemanager\Lfm::routes();
+    });
+
     Route::get('/', 'HomeController@index')->name('home');
 
     Route::get('/posts', 'PostController@index')->name('post.index');
     Route::get('/posts/create', 'PostController@create')->name('post.create');
     Route::post('/posts/store', 'PostController@store')->name('post.store');
-    Route::post('/posts/image/upload', 'PostController@upload')->name('post.image.upload');
+    // Route::post('/posts/image/upload', 'PostController@upload')->name('post.image.upload');
     Route::post('/posts/filter', 'PostController@filterBy')->name('post.filter');
     Route::delete('/posts/{id}', 'PostController@destroy')->name('post.destroy');
     Route::post('/posts/{id}/changeStatus', 'PostController@changeStatus')->name('post.changeStatus');

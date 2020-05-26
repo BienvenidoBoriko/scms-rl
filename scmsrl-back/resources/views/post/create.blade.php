@@ -106,12 +106,16 @@
                             <label class="custom-control-label" for="publiced">Publicar</label>
                         </div>
                         <div class="custom-control custom-radio">
-                            <input type="radio" {{ old('status')=='draff'?'checked="checked"':'' }} id="draff" name="status" value="draff" class="custom-control-input">
-                            <label class="custom-control-label @error('status') is-invalid @enderror" for="draff">Guardar
+                            <input type="radio"
+                                {{ old('status')=='draff'?'checked="checked"':'' }}
+                                id="draff" name="status" value="draff" class="custom-control-input">
+                            <label class="custom-control-label @error('status') is-invalid @enderror"
+                                for="draff">Guardar
                                 como borrador</label>
                         </div>
+                        <x-error-message name="status" />
                     </fieldset>
-                    <x-error-message name="status" />
+
                 </div>
 
                 <div class="col-md-3">
@@ -130,15 +134,25 @@
                     <x-error-message name="author_id" />
                 </div>
 
+
                 <div class="col-md-4 mt-4">
-                    <div class="custom-file">
-                        <input class="custom-file-input @error('featured_img') is-invalid @enderror" id="featured_img"
-                            name="featured_img" type="file">
-                        <label class="custom-file-label" for="featured_img">Imagen de
-                            cabecera</label>
-                        <x-error-message name="featured_img" />
-                    </div>
+                    <fieldset class="p-2">
+                        <legend class="h6">imagen de cabezera</legend>
+                        <div class="form-row">
+                            <div class="col-md-4 pr-0">
+                                <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                    <i class="fa fa-picture-o"></i> Cargar
+                                </a>
+                            </div>
+                            <div class="col-md-8 pl-0">
+                                <input id="thumbnail" class="form-control @error('featured_img') is-invalid @enderror" type="text" value="{{ old('featured_img') }}" name="featured_img">
+                                <x-error-message name="featured_img" />
+                            </div>
+                        </div>
+                        <img id="holder" style="margin-top:15px;max-height:100px;">
+                    </fieldset>
                 </div>
+
 
             </div>
         </div>
@@ -146,12 +160,16 @@
         <button class="btn btn-primary ml-3 btn-secondary" type="button">Volver</button>
     </form>
 </section>
+
 <script>
-    CKEDITOR.replace('html', {
-        filebrowserUploadUrl: "{{ route('post.image.upload', ['_token' => csrf_token() ]) }}",
-        filebrowserUploadMethod: 'form'
+
+    CKEDITOR.replace("html", {
+        filebrowserImageBrowseUrl: "/laravel-filemanager?type=Images",
+        filebrowserImageUploadUrl:
+            "/laravel-filemanager/upload?type=Images&_token=csrf_token()",
+        filebrowserBrowseUrl: "/laravel-filemanager?type=Files",
+        filebrowserUploadUrl:
+            "/laravel-filemanager/upload?type=Files&_token=csrf_token()"
     });
-
 </script>
-
 @endsection

@@ -14,7 +14,6 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="http://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <script>window.CKEDITOR || document.write('<script src="/vendor/ckeditor/ckeditor.js"/>')</script>
-
    <!-- <script src="/vendor/ckeditor/ckeditor.js"></script> -->
 
 
@@ -26,6 +25,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
     @yield('scripts')
 </head>
 

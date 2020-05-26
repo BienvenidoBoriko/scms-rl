@@ -36,8 +36,22 @@
         </div>
         <div class="form-group">
             <div class="form-row">
-                <div class="col"><label class="custom-file-label" for="featured_img">Imagen de cabecera<br></label><input id="featured_img" class="custom-file-input @error('featured_img') is-invalid @enderror" name="featured_img" type="file">
-                <x-error-message name="featured_img"/>
+                <div class="col">
+                    <fieldset class="p-2">
+                        <legend class="h6">imagen de cabezera</legend>
+                        <div class="form-row">
+                            <div class="col-md-4 pr-0">
+                                <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                    <i class="fa fa-picture-o"></i> Cargar
+                                </a>
+                            </div>
+                            <div class="col-md-8 pl-0">
+                                <input id="thumbnail" class="form-control @error('featured_img') is-invalid @enderror" type="text" value="{{ $category->featured_img }}" name="featured_img">
+                                <x-error-message name="featured_img" />
+                            </div>
+                        </div>
+                        <img id="holder" style="margin-top:15px;max-height:100px;">
+                    </fieldset>
                 </div>
             </div>
         </div>
