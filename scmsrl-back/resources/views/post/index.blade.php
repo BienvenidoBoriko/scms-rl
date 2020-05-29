@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@php
+    $title = config('titles.' . Route::currentRouteName());
+@endphp
+@section('title', $title)
+
 @section('content')
 <section>
     <a class="btn btn-secondary" href="{{ route('post.create') }}">Crear entrada</a>
@@ -19,6 +24,12 @@
             <div class="col col-md-2"><button class="btn btn-primary" type="submit">Filtrar</button></div>
         </div>
     </form>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">
+                Entradas
+            </h4>
+        </div>
     <div class="table-responsive mt-4 mb-4">
         <table class="table">
             <thead>
@@ -83,6 +94,7 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
     </div>
     <nav class="d-flex justify-content-end">
         {{ $posts->links() }}

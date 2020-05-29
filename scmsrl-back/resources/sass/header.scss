@@ -1,0 +1,120 @@
+// header part
+@import "notify";
+
+/*******************
+ General Topbar
+*******************/
+
+.topbar {
+    position: relative;
+    z-index: 50;
+    transition: $transitions;
+    box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.05);
+    background: $topbar;
+    height: $topbar-height;
+    width: 100%;
+    .navbar-collapse {
+        padding: 0px 10px 0 0;
+    }
+    .top-navbar {
+        min-height: $topbar-height;
+        padding: 0px;
+        .dropdown-toggle::after {
+            display: none;
+        }
+        .navbar-header {
+            line-height: $topbar-navlink-height;
+            background-color: $skin5;
+            width: 250px;
+            .navbar-brand {
+                // display: flex;
+                // align-items: center;
+                margin: 0px;
+                padding: $topbar-navbrand-padding;
+                //justify-content: center;
+
+                .logo {
+                    color: $theme-light;
+                    text-decoration: none;
+
+                    &:hover {
+                        color: $card-alt;
+                    }
+                }
+                .logo-text {
+                    font-weight: 700;
+                    padding: 1px 3px;
+                    font-size: 1.2em;
+                }
+                .logo-icon {
+                    margin-right: 5px;
+                }
+                .sidebartoggler {
+                    color: $white;
+                }
+            }
+        }
+        .navbar-nav > .nav-item > .nav-link {
+            padding: $topbar-navlink-padding;
+            font-size: $topbar-navlink-font-size;
+            line-height: $topbar-navlink-height;
+            height: $topbar-navlink-height;
+            .noti {
+                position: absolute;
+                top: 13px;
+                left: 28px;
+                font-size: 60%;
+            }
+        }
+        .navbar-nav > .nav-item {
+            transition: 0.2s ease-in;
+            &:hover {
+                background: $transparent-dark-bg;
+            }
+        }
+    }
+    .user-dd,
+    .mailbox {
+        min-width: 280px;
+    }
+    .nav-toggler,
+    .topbartoggler {
+        color: $theme-light;
+        padding: 0 15px;
+    }
+}
+
+/*******************
+Topbar Responsive
+******************/
+
+@media (max-width: 767px) {
+    .topbar .top-navbar {
+        .navbar-collapse.show,
+        .navbar-collapse.collapsing {
+            display: block;
+            width: 100%;
+            border-top: 1px solid $border-color;
+            background: $white;
+        }
+        .navbar-nav {
+            flex-direction: row;
+            .dropdown {
+                position: static;
+            }
+        }
+        .navbar-header {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
+        }
+        .dropdown-menu {
+            position: absolute;
+            width: 100%;
+            .with-arrow {
+                display: none;
+            }
+        }
+    }
+}

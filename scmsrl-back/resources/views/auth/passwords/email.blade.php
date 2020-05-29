@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@php
+    $title = config('titles.' . Route::currentRouteName());
+@endphp
+@section('title', $title)
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

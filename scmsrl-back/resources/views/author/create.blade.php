@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
+@php
+    $title = config('titles.' . Route::currentRouteName());
+@endphp
+@section('title', $title)
+
 @section('content')
 
 <section>
+    <div class="card">
     <form class="mt-4 mb-2" id="author-create-form" action="{{ route('author.store') }}" method="POST"
     enctype="multipart/form-data">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -108,5 +114,6 @@
         </div><button class="btn btn-primary mr-5" type="submit">Guardar</button><button
             class="btn btn-primary ml-3 btn-secondary" type="button">Volver</button>
     </form>
+    </div>
 </section>
 @endsection

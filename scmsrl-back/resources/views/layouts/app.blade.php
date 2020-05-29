@@ -7,14 +7,17 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="icon" href="{{ asset('logo.png') }}">
+    <title>@yield('title',config('app.name', 'Laravel')) </title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="http://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-    <script>window.CKEDITOR || document.write('<script src="/vendor/ckeditor/ckeditor.js"/>')</script>
-   <!-- <script src="/vendor/ckeditor/ckeditor.js"></script> -->
+    <script>
+        window.CKEDITOR || document.write('<script src="/vendor/ckeditor/ckeditor.js"/>')
+
+    </script>
+    <!-- <script src="/vendor/ckeditor/ckeditor.js"></script> -->
 
 
     <!-- Fonts -->
@@ -87,13 +90,15 @@
     </div>
     </nav>--}}
 
-    <main class="d-flex flex-wrap">
+    <main class="d-flex flex-wrap" id="main-wrapper" data-navbarbg="skin6" data-theme="light" data-layout="vertical"
+        data-sidebartype="full" data-boxed-layout="full">
+        <x-navbar />
         <x-sidebar />
-        <section class="w-100 content-margin" >
-            <x-navbar />
-            <x-breadcrumbs/>
-            <x-success-message/>
-            <section class="mr-3 ml-3 pt-3 " >
+        <section class="w-100 content-margin">
+
+            <x-breadcrumbs :title="$title" />
+            <x-success-message />
+            <section class="mr-3 ml-3 pt-3 mb-2 ">
                 @yield('content')
             </section>
         </section>

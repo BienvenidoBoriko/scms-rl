@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@php
+    $title = config('titles.' . Route::currentRouteName());
+@endphp
+@section('title', $title)
+
 @section('content')
 
 

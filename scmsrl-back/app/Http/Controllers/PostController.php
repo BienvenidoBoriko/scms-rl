@@ -149,7 +149,7 @@ class PostController extends Controller
             'meta_title'=>['required', 'string'],
             'meta_desc'=>['required', 'string'],
             'custom_except' => ['required','string','nullable'],
-            'slug' => ['required','string','max:20'],
+            'slug' => ['required','string','max:200'],
             'tags' => ['required','array'],
             'category_id' => ['required','string','nullable']
         ]);

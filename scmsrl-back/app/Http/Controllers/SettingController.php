@@ -19,7 +19,7 @@ class SettingController extends Controller
 
     public function index()
     {
-        return view('setting.index', ['title'=>Setting::where('name', 'title')->first(),
+        return view('setting.index', ['siteTitle'=>Setting::where('name', 'title')->first(),
         'cover_img'=>Setting::where('name', 'cover_img')->first(),
         'desc'=>Setting::where('name', 'desc')->first(),'lang'=>Setting::where('name', 'lang')->first(),
         'facebook'=>Setting::where('name', 'facebook')->first(),'twitter'=>Setting::where('name', 'twitter')->first(),
