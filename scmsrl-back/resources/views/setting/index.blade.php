@@ -6,15 +6,15 @@
 @section('title', $title)
 @section('content')
 <section>
-    <div class="card">
+    <div class="card pl-3 pr-3">
         <form class="mt-4 mb-2" action="{{ route('setting.store') }}" method="POST"
             enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="form-group">
                 <div class="form-row">
                     <div class="col"><label for="title">titulo del sitio<br></label><input value="
-            {{ $siteTitle->value }}" name="title" id="title" class="form-control @error('title') is-invalid @enderror"
-                            type="text" required="required">
+            {{ $siteTitle->value }}" name="title" id="title"
+                            class="form-control @error('title') is-invalid @enderror" type="text" required="required">
                         <x-error-message name="title" />
                     </div>
                     <div class="col"><label for="desc">descripcion corta<br></label><input value="
@@ -46,7 +46,8 @@
                                     <x-error-message name="cover_img" />
                                 </div>
                             </div>
-                            <img id="holder" style="margin-top:15px;max-height:100px;">
+                            <div id="holder" class="image-box text-center">
+                            </div>
                         </fieldset>
                     </div>
                 </div>

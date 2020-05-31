@@ -8,7 +8,7 @@
 @section('content')
 
 <section>
-    <div class="card">
+    <div class="card pl-3 pr-3">
         <form class="mt-4 mb-2" id="tag-create-form" action="{{ route('tag.update',$tag->id) }}"
             method="POST" enctype="multipart/form-data">
             @method('put')
@@ -66,7 +66,8 @@
                                     <x-error-message name="featured_img" />
                                 </div>
                             </div>
-                            <img id="holder" style="margin-top:15px;max-height:100px;">
+                            <div id="holder" class="image-box text-center">
+                            </div>
                         </fieldset>
                     </div>
                 </div>

@@ -26,6 +26,39 @@ $(document).ready(function() {
     $("#lfm2").filemanager("image");
 });
 
+document.addEventListener(
+    "readystatechange",
+    evento => {
+        if (document.readyState == "complete") {
+            if (
+                document.getElementById("thumbnail") &&
+                document.getElementById("thumbnail").value !== ""
+            ) {
+                let img = document.createElement("img");
+                img.setAttribute(
+                    "src",
+                    document.getElementById("thumbnail").value
+                );
+                img.setAttribute("alt", "preview de imagen cargada1");
+                document.getElementById("holder").appendChild(img);
+                if (
+                    document.getElementById("thumbnail1") &&
+                    document.getElementById("thumbnail1").value !== ""
+                ) {
+                    let img1 = document.createElement("img");
+                    img1.setAttribute(
+                        "src",
+                        document.getElementById("thumbnail1").value
+                    );
+                    img1.setAttribute("alt", "preview de imagen cargada2");
+                    document.getElementById("holder1").appendChild(img1);
+                }
+            }
+        }
+    },
+    false
+);
+
 /*
 Template Name: Admin Template
 Author: Wrappixel

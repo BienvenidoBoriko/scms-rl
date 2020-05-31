@@ -114,7 +114,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = User::withCount('posts')->where('id', $id)->first();
         $this->authorize('update', $user);
         return view('author.edit', [
             'author' => $user,

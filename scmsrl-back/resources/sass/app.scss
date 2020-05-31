@@ -23,14 +23,12 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
-$sidebarBackgroun: #001529;
-
 /** begin View home **/
 
 .panel-default > .panel-heading {
-    background-color: #3c8dbc !important;
-    border-color: #3c8dbc !important;
-    color: #ffffff !important;
+    background-color: $primary;
+    border-color: $skin5;
+    color: $white;
 }
 
 .well {
@@ -367,4 +365,20 @@ Card
 .card-moved .card {
     background: $info;
     color: $white;
+}
+
+//image preview box styles
+.image-box {
+    margin: 0 auto;
+    margin-top: 1em;
+    height: 11em;
+    width: 15em;
+    background: $skin5;
+    box-shadow: 0px 5px 10px #000;
+    overflow: hidden;
+
+    & img {
+        height: 100%;
+        width: 100%;
+    }
 }
