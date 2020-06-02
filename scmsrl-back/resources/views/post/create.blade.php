@@ -6,7 +6,7 @@
 @section('title', $title)
 @section('content')
 
-<section>
+<section class="container-fluid">
     <div class="card pl-3 pr-3">
         <form class="mt-4 mb-2" action="{{ route('post.store') }}" method="POST"
             enctype="multipart/form-data">

@@ -11,8 +11,7 @@
                             <a href="{{ route('home') }}">Home</a>
                         </li>
                         @for($i = 1; $i <= count(Request::segments()); $i++)
-                            <li class="breadcrumb-item {{ $i===count(Request::segments())?'active':'' }}"
-                                {{ $i===count(Request::segments())? 'aria-current="page"':'' }}>
+                            <li class="breadcrumb-item {{ $i===count(Request::segments())?'active':'' }}">
                                 <a
                                     href="{{ URL::to( implode( '', array_slice(Request::segments(), 0 ,$i, true))) }}">
                                     {{ strtolower(Request::segment($i)) }}

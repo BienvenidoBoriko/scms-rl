@@ -6,7 +6,7 @@
 @section('title', $title)
 
 @section('content')
-<section>
+<section class="container-fluid">
     <a class="btn btn-secondary" href="{{ route('post.create') }}">Crear entrada</a>
     <form class="mt-4 mb-2" action="{{ route('post.filter') }}" method="POST"
         enctype="multipart/form-data">

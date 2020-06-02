@@ -7,7 +7,7 @@
 
 @section('content')
 
-<section>
+<section class="container-fluid">
     <div class="card pl-3 pr-3">
         <form class="mt-4 mb-2" id="category-create-form" action="{{ route('category.store') }}"
             method="POST" enctype="multipart/form-data">

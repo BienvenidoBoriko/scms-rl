@@ -1,13 +1,10 @@
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Nunito");
+@import url("https://fonts.googleapis.com/css?family=Rubik:100,100i,300,300i,400,400i,500,500i,700");
 // Variables
 @import "./variables";
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 
-/** sidebar boss **/
-//@import "./layout.scss";
-@import url("https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700");
 html {
     position: relative;
     min-height: 100%;
@@ -18,10 +15,115 @@ body {
     margin: 0;
     overflow-x: hidden;
     transition: 0.2s ease-in;
-    font-size: 14px;
-    color: #333;
-    font-family: "Roboto", sans-serif;
+    color: $body-color;
+    font-family: $font-family-sans-serif;
 }
+
+//begin header
+.topbar {
+    position: relative;
+    z-index: 50;
+    transition: $transitions;
+    box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.05);
+    background: $topbar;
+    height: $topbar-height;
+    width: 100%;
+    .navbar-collapse {
+        padding: 0px 10px 0 0;
+    }
+    .top-navbar {
+        min-height: $topbar-height;
+        padding: 0px;
+        & .dropdown-toggle::after {
+            display: none;
+        }
+        & .navbar-header {
+            line-height: $topbar-navlink-height;
+            background-color: $skin5;
+            width: 250px;
+            & .navbar-brand {
+                margin: 0px;
+                padding: $topbar-navbrand-padding;
+
+                & .logo {
+                    color: $theme-light;
+                    text-decoration: none;
+
+                    &:hover {
+                        color: $card-alt;
+                    }
+                }
+                & .logo-text {
+                    font-weight: 700;
+                    padding: 1px 3px;
+                    font-size: 1.2em;
+                }
+                & .logo-icon {
+                    margin-right: 5px;
+                }
+                & .sidebartoggler {
+                    color: $white;
+                }
+            }
+        }
+        .navbar-nav > .nav-item > .nav-link {
+            padding: $topbar-navlink-padding;
+            font-size: $topbar-navlink-font-size;
+            line-height: $topbar-navlink-height;
+            height: $topbar-navlink-height;
+        }
+        .navbar-nav > .nav-item {
+            transition: 0.2s ease-in;
+            &:hover {
+                background: $transparent-dark-bg;
+            }
+        }
+    }
+    .user-dd {
+        min-width: 280px;
+    }
+    .nav-toggler,
+    .topbartoggler {
+        color: $theme-light;
+        padding: 0 15px;
+    }
+}
+
+/*******************
+Topbar Responsive
+******************/
+
+@media (max-width: 767px) {
+    .topbar .top-navbar {
+        .navbar-collapse.show,
+        .navbar-collapse.collapsing {
+            display: block;
+            width: 100%;
+            border-top: 1px solid $border-color;
+            background: $white;
+        }
+        .navbar-nav {
+            flex-direction: row;
+            .dropdown {
+                position: static;
+            }
+        }
+        .navbar-header {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
+        }
+        .dropdown-menu {
+            position: absolute;
+            width: 100%;
+            .with-arrow {
+                display: none;
+            }
+        }
+    }
+}
+//end header
 
 /** begin View home **/
 
@@ -35,30 +137,16 @@ body {
     min-height: 20px;
     padding: 19px;
     margin-bottom: 20px;
-    background-color: #f5f5f5;
-    border: 1px solid #e3e3e3;
+    color: $theme-dark;
+    background-color: $gray-100;
+    border: 1px solid $gray-300;
     border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: $shadow;
+    box-shadow: $shadow;
 }
-
-.well blockquote {
-    border-color: #ddd;
-    border-color: rgba(0, 0, 0, 0.15);
-}
-
-.well-lg {
-    padding: 24px;
-    border-radius: 6px;
-}
-
-.well-sm {
-    padding: 9px;
-    border-radius: 3px;
-}
-
 /** end view home **/
 
+//profile img view author
 .profileImg {
     width: 25px;
     height: 25px;
@@ -68,6 +156,8 @@ body {
 }
 
 //
+
+//begin
 section.content-margin {
     margin-left: 250px;
 }
@@ -78,12 +168,7 @@ section.content-margin {
     }
 }
 
-// Sidebar
-$sidebar-link-padding: 12px 15px;
-$sidebar-icon-size: 20px;
-$sidebar-first-level-padding: 0 0 10px 0;
-$sidebar-first-level-link-padding: 10px 15px;
-$sidebar-first-level-icon-size: 14px;
+//begin Sidebar
 /*******************
 Main sidebar
 ******************/
@@ -259,13 +344,9 @@ Down arrow
     -o-transform: rotate(-135deg) translate(0, -50%);
     transform: rotate(-135deg) translate(0, -50%);
 }
+//end sidebar
 
-@import "./header.scss";
-
-/*******************
- Breadcrumb and page title
-*******************/
-
+// begin Breadcrumb and page title
 .page-breadcrumb {
     padding: 20px 20px 0 20px;
     & .page-title {
@@ -291,10 +372,9 @@ Down arrow
     }
 }
 
-/*******************
-Card
-******************/
+//end Breadcrumb and page title
 
+//begin Card
 .card {
     margin-bottom: 20px;
     .card-subtitle {
@@ -319,55 +399,9 @@ Card
     }
 }
 
-.card-alt {
-    margin: 0 -20px;
-    background: $card-alt;
-}
+//end card
 
-.card-group {
-    margin-bottom: 20px;
-    .card {
-        border-right: 1px solid $border-color;
-    }
-}
-
-.card-fullscreen {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-    overflow: auto;
-}
-
-.oh {
-    overflow: hidden;
-}
-.card-hover {
-    -webkit-transition: all 0.25s ease;
-    -o-transition: all 0.25s ease;
-    -moz-transition: all 0.25s ease;
-    transition: all 0.25s ease;
-    &:hover {
-        webkit-transform: translateY(-4px) scale(1.01);
-        -moz-transform: translateY(-4px) scale(1.01);
-        -ms-transform: translateY(-4px) scale(1.01);
-        -o-transform: translateY(-4px) scale(1.01);
-        transform: translateY(-4px) scale(1.01);
-        -webkit-box-shadow: 0 14px 24px rgba(62, 57, 107, 0.1);
-        box-shadow: 0 14px 24px rgba(62, 57, 107, 0.1);
-    }
-}
-.draggable-cards .card-header {
-    cursor: move;
-}
-.card-moved .card {
-    background: $info;
-    color: $white;
-}
-
-//image preview box styles
+//begin image preview box styles
 .image-box {
     margin: 0 auto;
     margin-top: 1em;
@@ -382,3 +416,5 @@ Card
         width: 100%;
     }
 }
+
+//end image preview box styles
