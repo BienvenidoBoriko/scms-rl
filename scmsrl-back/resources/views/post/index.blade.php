@@ -8,7 +8,7 @@
 @section('content')
 <section class="container-fluid">
     @can('create', App\Post::class)
-        <a class="btn btn-secondary" href="{{ route('post.create') }}">Crear entrada</a>
+    <a class="btn btn-secondary" href="{{ route('post.create') }}">Crear entrada</a>
     @endcan
     <form class="mt-4 mb-2" action="{{ route('post.filter') }}" method="POST"
         enctype="multipart/form-data">
@@ -32,75 +32,75 @@
                 Entradas
             </h4>
         </div>
-        <div class="table-responsive mt-4 mb-4">
-            <table class="table">
-                <thead>
+    <div class="table-responsive mt-4 mb-4">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Categoria</th>
+                    <th>Etiquetas</th>
+                    <th>Destacado</th>
+                    <th>Estado</th>
+                    <th>Editar</th>
+                    <th>Borrar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($posts as $post)
                     <tr>
-                        <th>Titulo</th>
-                        <th>Categoria</th>
-                        <th>Etiquetas</th>
-                        <th>Destacado</th>
-                        <th>Estado</th>
-                        <th>Editar</th>
-                        <th>Borrar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($posts as $post)
-                        <tr>
-                            <td><a
-                                    href="{{ config('settings.host-front').':'.config('settings.port-front').'/posts/'.$post->id }}">
-                                    {{ Str::limit( $post->title,50) }} </a> </td>
-                            <td> {{ $post->category->name }}</td>
-                            <td>
-                                @foreach($post->tags as $tag)
-                                    <span class="badge badge-secondary">{{ $tag->name }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                @if($post->featured==true) si @else no @endif
-                            </td>
-                            <td>
-                                <form action="{{ route('post.changeStatus', $post->id) }}"
-                                    method="post">
-                                    @csrf
-                                    <blade
-                                        if|(Str%3A%3Aof(%24post-%3Estatus)-%3Eexactly(%26%2339%3Bpubliced%26%2339%3B))>
-                                        <div>Publicado</div>
-                                        <input type="hidden" name="status" value="draff">
-                                        <button type="submit" class="btn btn-sm btn-info">cambiar a borrador</button>
-                                    @else
-                                        <div>Borrador</div>
-                                        <input type="hidden" name="status" value="publiced">
-                                        <button type="submit" class="btn btn-sm btn-info">
-                                            publicar</button>
-                                    @endif
-                                </form>
-                            </td>
-                            @can('update', $post)
-                                <td>
-                                    <a href="{{ route('post.edit', $post->id) }}"
-                                        class="btn btn-sml btn-secondary"> Editar</a>
+                        <td><a
+                                href="{{ config('settings.host-front').':'.config('settings.port-front').'/posts/'.$post->id }}">
+                                {{ Str::limit( $post->title,50) }} </a> </td>
+                        <td> {{ $post->category->name }}</td>
+                        <td>
+                            @foreach($post->tags as $tag)
+                                <span class="badge badge-secondary">{{ $tag->name }}</span>
+                            @endforeach
+                        </td>
+                        <td>
+                            @if($post->featured==true) si @else no @endif
+                        </td>
+                        <td>
+                            <form action="{{ route('post.changeStatus', $post->id) }}"
+                                method="post">
+                                @csrf
+                                @if(Str::of($post->status)->exactly('publiced'))
+                                    <div>Publicado</div>
+                                    <input type="hidden" name="status" value="draff">
+                                    <button type="submit"
+                                        class="btn btn-sm btn-info">cambiar a borrador</button>
+                                @else
+                                    <div>Borrador</div>
+                                    <input type="hidden" name="status" value="publiced">
+                                    <button type="submit"  class="btn btn-sm btn-info">
+                                        publicar</button>
+                                @endif
+                            </form>
+                        </td>
+                        @can('update', $post)
+                        <td>
+                            <a href="{{ route('post.edit', $post->id) }}"
+                                class="btn btn-sml btn-secondary"> Editar</a>
 
-                                </td>
-                            @endcan
-                            @can('delete', $post)
-                                <td>
-                                    <form action="{{ route('post.destroy', $post->id) }}"
-                                        method="post">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit" class="btn btn-sml btn-danger"
-                                            onClick="return confirm('Estas seguro de querrer eliminarlo?')"><i
-                                                class="fa fa-timex"></i> Borrar</button>
-                                    </form>
-                                </td>
-                            @endcan
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+                        </td>
+                        @endcan
+                        @can('delete', $post)
+                        <td>
+                            <form action="{{ route('post.destroy', $post->id) }}"
+                                method="post">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-sml btn-danger"
+                                    onClick="return confirm('Estas seguro de querrer eliminarlo?')"><i
+                                        class="fa fa-timex"></i> Borrar</button>
+                            </form>
+                        </td>
+                        @endcan
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
     </div>
     <nav class="d-flex justify-content-end">
         {{ $posts->links() }}
