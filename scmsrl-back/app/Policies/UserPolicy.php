@@ -6,6 +6,7 @@ use App\User;
 use App\rol;
 use Illuminate\Support\Str;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class UserPolicy
 {
@@ -61,6 +62,13 @@ class UserPolicy
         return Str::of('admin')->exactly($rol->name) || $user->id === $model->id;
     }
 
+
+    public function changeRol(User $user)
+    {
+        $rol=rol::find(Auth::user()->rol_id);
+        return Str::of('admin')->exactly($rol->name) && Auth::user()->id === $user->id;
+    }
+
     /**
      * Determine whether the user can delete the model.
      *
@@ -71,7 +79,7 @@ class UserPolicy
     public function delete(User $user, User $model)
     {
         $rol=rol::find($user->rol_id);
-       return Str::of('admin')->exactly($rol->name) && $user->id != $model->id;
+        return Str::of('admin')->exactly($rol->name) && $user->id != $model->id;
     }
 
     /**

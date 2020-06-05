@@ -21,7 +21,7 @@ class SettingPolicy
     public function viewAny(User $user)
     {
         $rol=rol::find($user->rol_id);
-       return Str::of('admin')->exactly($rol->name);
+        return Str::of('admin')->exactly($rol->name);
     }
 
     /**
@@ -34,7 +34,7 @@ class SettingPolicy
     public function view(User $user, Setting $setting)
     {
         $rol=rol::find($user->rol_id);
-       return Str::of('admin')->exactly($rol->name);
+        return Str::of('admin')->exactly($rol->name);
     }
 
     /**
@@ -46,7 +46,7 @@ class SettingPolicy
     public function create(User $user)
     {
         $rol=rol::find($user->rol_id);
-       return Str::of('admin')->exactly($rol->name);
+        return Str::of('admin')->exactly($rol->name);
     }
 
     /**
@@ -58,9 +58,9 @@ class SettingPolicy
      */
     public function update(User $user)
     {
-        /* $rol=rol::find($user->rol_id);
-       return Str::of('admin')->exactly($rol->name); */
-       return true;
+        $rol=rol::find($user->rol_id);
+        return Str::of('admin')->exactly($rol->name);
+        // return true;
     }
 
 
@@ -75,7 +75,7 @@ class SettingPolicy
     public function delete(User $user, Setting $setting)
     {
         $rol=rol::find($user->rol_id);
-       return Str::of('admin')->exactly($rol->name);
+        return Str::of('admin')->exactly($rol->name);
     }
 
     /**
@@ -101,6 +101,6 @@ class SettingPolicy
     public function forceDelete(User $user, Setting $setting)
     {
         $rol=rol::find($user->rol_id);
-       return Str::of('admin')->exactly($rol->name);
+        return Str::of('admin')->exactly($rol->name);
     }
 }

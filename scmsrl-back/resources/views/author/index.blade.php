@@ -7,7 +7,9 @@
 
 @section('content')
 <section class="container-fluid">
-    <a class="btn btn-secondary" href="{{ route('author.create') }}">Crear autor<br></a>
+    @can('create', App\User::class)
+        <a class="btn btn-secondary" href="{{ route('author.create') }}">Crear autor<br></a>
+    @endcan
     <div class="row">
         <div class="col-9">
             <form class="mt-4 mb-2" action="{{ route('author.filter') }}" method="POST"
@@ -45,6 +47,7 @@
                         <th>Numero de entradas</th>
                         <th>Editar</th>
                         <th>Borrar</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -55,19 +58,24 @@
                                     alt="imagen de usuario {{ $author->name }}"> </td>
                             <td> {{ $author->name }} </td>
                             <td>{{ $author->posts_count }}</td>
-                            <td>
-                                <a href="{{ route('author.edit', $author->id) }}"
-                                    class="btn btn-sml btn-secondary">Editar</a>
-                            </td>
-                            <td>
-                                <form action="{{ route('author.destroy', $author->id) }}"
-                                    method="post">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button type="submit" class="btn btn-sml btn-danger"
-                                        onClick="return confirm('Estas seguro de querrer eliminarlo?')"> Borrar</button>
-                                </form>
-                            </td>
+                            @can('update', $author)
+                                <td>
+                                    <a href="{{ route('author.edit', $author->id) }}"
+                                        class="btn btn-sml btn-secondary">Editar</a>
+                                </td>
+                            @endcan
+                            @can('delete', $author)
+                                <td>
+                                    <form action="{{ route('author.destroy', $author->id) }}"
+                                        method="post">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-sml btn-danger"
+                                            onClick="return confirm('Estas seguro de querrer eliminarlo?')">
+                                            Borrar</button>
+                                    </form>
+                                </td>
+                            @endcan
                         </tr>
                     @endforeach
                 </tbody>

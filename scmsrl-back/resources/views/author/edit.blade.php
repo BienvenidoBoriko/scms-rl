@@ -89,18 +89,29 @@
                                         value="{{ $author->email }}" id="email" type="email">
                                     <x-error-message name="email" />
                                 </div>
-                                <div class="form-group"><label for="rol_id">Rol:<br></label><select id="rol_id"
-                                        name="rol_id" class="custom-select @error('rol_id') is-invalid @enderror">
-                                        <optgroup label="Roles">
-                                            @foreach($rols as $rol)
-                                                <option value="{{ $rol->id }}"
-                                                    selected="{{ $author->rol_id==$rol->id?'selected':'' }}">
-                                                    {{ $rol->name }}</option>
-                                            @endforeach
-                                        </optgroup>
-                                    </select>
-                                    <x-error-message name="rol_id" />
-                                </div>
+                                @can('changeRol', $author)
+                                    <div class="form-group"><label for="rol_id">Rol:<br></label><select id="rol_id"
+                                            name="rol_id" class="custom-select @error('rol_id') is-invalid @enderror">
+                                            <optgroup label="Roles">
+                                                @foreach($rols as $rol)
+                                                    <option value="{{ $rol->id }}"
+                                                        selected="{{ $author->rol_id==$rol->id?'selected':'' }}">
+                                                        {{ $rol->name }}</option>
+                                                @endforeach
+                                            </optgroup>
+                                        </select>
+                                        <x-error-message name="rol_id" />
+                                    </div>
+                                @endcan
+                                @cannot('changeRol', $author)
+                                    <p>
+                                        @foreach($rols as $rol)
+                                            @if($author->rol_id==$rol->id)
+                                                Role: {{ $rol->name }}
+                                            @endif
+                                        @endforeach
+                                    </p>
+                                @endcan
                                 <div class="form-group"><label for="slug">Slug:<br></label><input name="slug"
                                         class="form-control @error('slug') is-invalid @enderror"
                                         value="{{ $author->slug }}" id="slug" type="text">
