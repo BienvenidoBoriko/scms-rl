@@ -6,7 +6,7 @@
             <ul id="sidebarnav">
                 <li class="sidebar-item">
                     <a class="sidebar-link "
-                        href="{{ config('settings.host-front').':'.config('settings.port-front') }}"
+                        href="{{ env('APP_HOST_FRONT').':'.env('APP_HOST_FRON_PORT') }}"
                         aria-expanded="false">
                         <i class="fas fa-blog"></i>
                         <span class="hide-menu">Visitar Sitio</span>

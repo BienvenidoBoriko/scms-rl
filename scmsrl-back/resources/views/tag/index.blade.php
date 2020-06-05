@@ -46,7 +46,7 @@
                     @foreach($tags as $tag)
                         <tr>
                             <td> <a
-                                    href="{{ config('settings.host-front').':'.config('settings.port-front').'/tags/'.$tag->id }}">
+                                    href="{{ env('APP_HOST_FRONT').':'.env('APP_HOST_FRON_PORT').'/tags/'.$tag->id }}">
                                     {{ $tag->name }}</a> </td>
                             <td> {{ $tag->posts_count }} </td>
                             @can('update', $tag)

@@ -49,7 +49,7 @@
                 @foreach($posts as $post)
                     <tr>
                         <td><a
-                                href="{{ config('settings.host-front').':'.config('settings.port-front').'/posts/'.$post->id }}">
+                                href="{{ env('APP_HOST_FRONT').':'.env('APP_HOST_FRON_PORT').'/posts/'.$post->id }}">
                                 {{ Str::limit( $post->title,50) }} </a> </td>
                         <td> {{ $post->category->name }}</td>
                         <td>

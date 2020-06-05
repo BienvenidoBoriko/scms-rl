@@ -49,7 +49,7 @@
                     @foreach($categories as $category)
                         <tr>
                             <td><a
-                                    href="{{ config('settings.host-front').':'.config('settings.port-front').'/categories/'.$category->id }}">
+                                    href="{{ env('APP_HOST_FRONT').':'.env('APP_HOST_FRON_PORT').'/categories/'.$category->id }}">
                                     {{ $category->name }} </a></td>
                             <td>{{ $category->posts_count }}</td>
                             <td> {{ $category->visibility }} </td>
