@@ -12,11 +12,20 @@ use Config;
 
 class SettingController extends Controller
 {
+
+    /**
+     * Undocumented function
+     */
     public function __construct()
     {
         $this->authorizeResource(Setting::class, 'setting');
     }
 
+    /**
+     * Muestra los ajustes de la aplicacion
+     *
+     * @return View
+     */
     public function index()
     {
         return view('setting.index', ['siteTitle'=>Setting::where('name', 'title')->first(),
@@ -28,18 +37,7 @@ class SettingController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return View
-     */
-    public function create()
-    {
-
-        //return view('post.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Actualiza los ajustes de la pagina
      *
      * @param Request $request
      * @return RedirectResponse
@@ -78,48 +76,9 @@ class SettingController extends Controller
                 'value' => $value,
                 'type' => 'page'
             ];
-            /* if (Str::of($name)->exactly('title')) {
-                config(['.env.site_title' => 'hola']);
-                return redirect()->route('setting.index')->with('success', 'troll');
-            } */
             $setting = Setting::where('name', $name);
             $setting->update($data);
-            //Setting::create($data);
         }
         return redirect()->route('setting.index')->with('success', 'ajustes guardados correctamente!');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return Factory|View
-     */
-    public function edit($id)
-    {
-//
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param int $id
-     * @return RedirectResponse
-     * @throws ValidationException
-     */
-    public function update(Request $request)
-    {
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return RedirectResponse
-     */
-    public function destroy($id)
-    {
-        //Setting::find($id)->delete();
     }
 }

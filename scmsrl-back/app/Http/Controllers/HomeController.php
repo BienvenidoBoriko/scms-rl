@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Post;
 use App\Category;
 use App\Tag;
@@ -21,13 +22,15 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Muestra la vista principal de la
+     * aplicacion enviandola los posts, el numero de posts
+     * el numero de usuarios,numero de etiquetas,numero de categorias
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return View
      */
     public function index()
     {
-        return view('home',['posts' => Post::orderBy('created_at', 'desc')->limit(4)->get(),
+        return view('home', ['posts' => Post::orderBy('created_at', 'desc')->limit(4)->get(),
         'numPost'=>Post::all()->count(),'numAuthors'=>User::all()->count(),
         'numTags'=>Tag::all()->count(),'numCategories'=>Category::all()->count()
         ]);

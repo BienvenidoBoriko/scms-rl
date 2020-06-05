@@ -16,6 +16,13 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
+    /**
+     * Muestra la vista post.index con todos las entradas
+     * ordenadas por fecha de creacion de forma descendente, con una paginacion de
+     * siete y sus respectivas categorias y etiquetas
+     *
+     * @return View
+     */
     public function index()
     {
         $this->authorize('viewAny', Post::class);
@@ -25,7 +32,8 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra la vista post.create para poder crear una entrada enviandola
+     * todos los usuarios, categorias y etiquetas
      *
      * @return View
      */
@@ -35,11 +43,11 @@ class PostController extends Controller
         return view('post.create', ['users'=>User::all(),
         'categories' => Category::all(), 'tags'=> Tag::all()
         ]);
-        //return view('post.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guarda una entrada nueva en la base de
+     * datos
      *
      * @param Request $request
      * @return RedirectResponse
@@ -109,10 +117,13 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     *
+     * Devuelve la vista post.edit con el post, todas las
+     * etiquetas y todas las categorias para poder
+     * actualizar un determinado post
      *
      * @param int $id
-     * @return Factory|View
+     * @return View
      */
     public function edit($id)
     {
@@ -127,7 +138,7 @@ class PostController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza un determinado post
      *
      * @param Request $request
      * @param int $id
@@ -171,15 +182,15 @@ class PostController extends Controller
 
         $post->update($data);
 
-        /* if ($request->has('category')) {
-             $post->categories()->sync($request->input('category'));
-         } else {
-             $post->categories()->detach();
-         }*/
-
         return redirect()->route('post.index')->with('success', 'Entrada actualizada correctamente!');
     }
 
+    /**
+     * Filtra los post por categoria o por etiqueta
+     *
+     * @param Request $request
+     * @return View
+     */
     public function filterBy(Request $request)
     {
         $this->authorize('viewAny', Post::class);
@@ -203,10 +214,15 @@ class PostController extends Controller
         ]);
     }
 
+    /**
+     * cambia el estatus de un post(de publicado a borrador o viseversa)
+     *
+     * @param Request $request
+     * @param int $id
+     * @return RedirectResponse
+     */
     public function changeStatus(Request $request, $id)
     {
-        //return redirect()->route('post.index')->with('success', 'Estatus cambiado correctamente');
-
         $post = Post::findOrFail($id);
         $this->validate($request, [
             'status' => ['required','string',Rule::in(['publiced','draff']),'max:10']//draff como borrador
@@ -215,15 +231,13 @@ class PostController extends Controller
         $post->status = $request->status;
         $post->published_at=date("Y-m-d H:i:s");
 
-        //print_r($request->status);
-
         $post->save();
 
         return redirect()->route('post.index')->with('success', 'Estado cambiado correctamente');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina un determinado post
      *
      * @param int $id
      * @return RedirectResponse

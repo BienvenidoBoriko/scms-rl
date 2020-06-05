@@ -7,6 +7,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 trait ApiExceptionTrait
 {
+    /**
+     * Verifica si la excepcion es arrojada por
+     * no haber encontrado el modelo
+     *
+     * @param Request $request
+     * @param Exceptions $e
+     * @return void
+     */
     public function apiException($request, $e)
     {
         if ($e instanceof ModelNotFoundException) {

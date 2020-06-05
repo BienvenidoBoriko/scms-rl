@@ -21,10 +21,13 @@ class UserController extends Controller
     {
         // $this->authorizeResource(User::class, 'user');
     }
+
     /**
-     * Display a listing of the resource.
+     * Muestra la vista author.index con todas la etiquetas
+     * ordenadas por fecha de creacion de forma descendente, con una paginacion de
+     * siete y sus respectivo rol  y numero de posts
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
@@ -35,7 +38,8 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra la vista author.create para poder crear un author enviandola
+     * todos los roles
      *
      * @return \Illuminate\Http\Response
      */
@@ -48,10 +52,12 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guarda un nuevo usuario en la base de datos
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     *@throws ValidationException
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
@@ -107,10 +113,12 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Devuelve la vista author.edit con el usuario y
+     * todos los roles para poder
+     * actualizar un determinado usuario
      *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return View
      */
     public function edit($id)
     {
@@ -123,11 +131,12 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza un determinado usuario
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $id
+     * @return RedirectResponse
+     * @throws ValidationException
      */
     public function update(Request $request, $id)
     {
@@ -175,6 +184,12 @@ class UserController extends Controller
         return redirect()->route('author.index')->with('success', 'autor actualizado correctamente!');
     }
 
+    /**
+     * filtra los usuarios por rol o por nombre
+     *
+     * @param Request $request
+     * @return View
+     */
     public function filterBy(Request $request)
     {
         $this->authorize('viewAny', User::class);
@@ -197,10 +212,10 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina un determinado usuario
      *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return void
      */
     public function destroy($id)
     {

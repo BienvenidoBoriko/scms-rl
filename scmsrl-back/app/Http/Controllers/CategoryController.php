@@ -16,6 +16,13 @@ class CategoryController extends Controller
         //$this->authorizeResource(Category::class);
     }
 
+    /**
+     * Devuelve la vista category.index con todas las categorias
+     * ordenadas por fecha de creacion de forma descendente, con una paginacion de
+     * siete y el recuento de posts de cada una de las categorias
+     *
+     * @return View
+     */
     public function index()
     {
         $this->authorize('viewAny', Category::class);
@@ -25,7 +32,8 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra la vista category.create para
+     * crear una nueva categoria
      *
      * @return View
      */
@@ -36,7 +44,8 @@ class CategoryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guarda una nueva categoria en la base
+     * de datos
      *
      * @param Request $request
      * @return RedirectResponse
@@ -68,18 +77,16 @@ class CategoryController extends Controller
 
         $post = Category::create($data);
 
-        /*   if ($request->has('category')) {
-               $post->categories()->sync($request->input('category'));
-           }
-    */
         return redirect()->route('category.index')->with('success', 'categoria creada correctamente!');
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Muestra la vista para editar una determinada
+     * categoria. devuelve la vista category.edit y la
+     * categoria
      *
      * @param int $id
-     * @return Factory|View
+     * @return View
      */
     public function edit($id)
     {
@@ -91,7 +98,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza una determinada categoria
      *
      * @param Request $request
      * @param int $id
@@ -123,21 +130,17 @@ class CategoryController extends Controller
             'meta_desc' => $request->input('meta_desc')
         ];
 
-        /*if ($request->hasFile('cover_image')) {
-            $data['cover_image'] = $this->uploadOne($request->file('cover_image'));
-        }*/
-        $oldImg=\explode('/', $category->featured_img)[2];
-        Storage::delete('public/uploads/'.$oldImg);
         $category->update($data);
-        /* if ($request->has('category')) {
-             $post->categories()->sync($request->input('category'));
-         } else {
-             $post->categories()->detach();
-         }*/
 
         return redirect()->route('category.index')->with('success', 'categoria actualizada correctamente!');
     }
 
+    /**
+     * Busca una determinada categoria
+     *
+     * @param Request $request
+     * @return View
+     */
     public function filterBy(Request $request)
     {
         $this->authorize('viewAny', Category::class);
@@ -157,7 +160,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina una determinada categoria
      *
      * @param int $id
      * @return RedirectResponse

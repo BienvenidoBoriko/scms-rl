@@ -11,6 +11,13 @@ use Illuminate\Support\Str;
 
 class TagController extends Controller
 {
+    /**
+     * Muestra la vista tag.index con todos las etiquetas
+     * ordenadas por fecha de creacion de forma descendente, con una paginacion de
+     * siete y el numero de post que tiene
+     *
+     * @return View
+     */
     public function index()
     {
         $this->authorize('viewAny', Tag::class);
@@ -20,7 +27,7 @@ class TagController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra la tag.create para poder crear una etiqueta
      *
      * @return View
      */
@@ -31,7 +38,7 @@ class TagController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guarda una nueva etiqueta
      *
      * @param Request $request
      * @return RedirectResponse
@@ -61,18 +68,15 @@ class TagController extends Controller
 
         $post = Tag::create($data);
 
-        /*   if ($request->has('category')) {
-               $post->categories()->sync($request->input('category'));
-           }
-    */
         return redirect()->route('tag.index')->with('success', 'etiqueta creada correctamente!');
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Devuelve la vista tag.edit con la etiqueta para
+     * poder editarla
      *
      * @param int $id
-     * @return Factory|View
+     * @return View
      */
     public function edit($id)
     {
@@ -84,7 +88,7 @@ class TagController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza una determinada etiqueta
      *
      * @param Request $request
      * @param int $id
@@ -114,17 +118,17 @@ class TagController extends Controller
             'meta_desc' => $request->input('meta_desc')
         ];
 
-        /*if ($request->hasFile('cover_image')) {
-            $data['cover_image'] = $this->uploadOne($request->file('cover_image'));
-        }*/
-
-        $oldImg=\explode('/', $tag->featured_img)[2];
-        Storage::delete('public/uploads/'.$oldImg);
         $tag->update($data);
 
         return redirect()->route('tag.index')->with('success', 'Etiqueta actualizada correctamente!');
     }
 
+    /**
+     * Buesca una determinada etiqueta
+     *
+     * @param Request $request
+     * @return View
+     */
     public function filterBy(Request $request)
     {
         $this->authorize('viewAny', Tag::class);
@@ -143,7 +147,7 @@ class TagController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina una etiqueta de la base de datos
      *
      * @param int $id
      * @return RedirectResponse
