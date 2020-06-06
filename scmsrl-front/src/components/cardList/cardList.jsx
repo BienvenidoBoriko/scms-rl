@@ -1,5 +1,15 @@
 import React from "react";
 import Card from "./../card/card";
+
+/**
+ *crea un grupos de posts
+ *recibe el arreglo con los posts
+ *y el titulo del grupo
+ *utiliza el componente Card
+ *
+ * @param {*} { posts, title }
+ * @returns Component
+ */
 const CardList = ({ posts, title }) => {
   return (
     <div class="article-list">

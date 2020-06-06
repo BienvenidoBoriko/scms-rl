@@ -2,6 +2,12 @@ import React from "react";
 import * as moment from "moment";
 import "moment/locale/es";
 
+/**
+ *cabecera para los posts
+ *
+ * @param {*} { title, author, published_at, img }
+ * @returns
+ */
 const PostHeader = ({ title, author, published_at, img }) => {
   return (
     <header class="masthead" style={{ "background-image": `url(${img})` }}>

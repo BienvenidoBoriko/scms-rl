@@ -1,6 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+/**
+ *crea una tarjeta dependiendo de los
+ *datos que se le pase
+ *
+ * @param {*} { img, title, desc, id }
+ * @returns Component
+ */
 const Card = ({ img, title, desc, id }) => {
   return (
     <div className="card mt-3 mb-4 pb-1">

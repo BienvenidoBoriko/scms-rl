@@ -15,6 +15,7 @@ function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  //obiene los datos
   const getData = async () => {
     let datas = { posts: [], tags: [], categories: [], settings: [] };
 
@@ -39,7 +40,7 @@ function App() {
 
   useEffect(() => {
     getData();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" }); //contorla el nav al hacer scroll
   }, []);
 
   const reloadContent = () => {
@@ -50,7 +51,7 @@ function App() {
       return <Loading width="75" height="75" />;
     } else {
       return (
-        <div className="App">
+        <div className="App container-fluid">
           <Router>
             <NavBar title={data.settings[0].value} categories={data.categories} tags={data.tags} reloadContent={reloadContent} />
 

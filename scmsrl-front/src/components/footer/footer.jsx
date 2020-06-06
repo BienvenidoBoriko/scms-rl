@@ -1,6 +1,11 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-
+/**
+ *Crea un footer
+ *
+ * @param {*} { categories, tags, settings }
+ * @returns Component
+ */
 const Footer = ({ categories, tags, settings }) => {
   return (
     <div class="footer-dark">

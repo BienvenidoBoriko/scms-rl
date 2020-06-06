@@ -1,5 +1,13 @@
 import React from "react";
 import config from "./../../utils/config";
+
+/**
+ *Crea una cabecera con una imagen de fondo
+ *un titulo y la descripcion
+ *
+ * @param {*} { title, cover_img, desc }
+ * @returns
+ */
 const Header = ({ title, cover_img, desc }) => {
   return (
     <header class="masthead" style={{ "background-image": "url(" + cover_img + ")" }}>

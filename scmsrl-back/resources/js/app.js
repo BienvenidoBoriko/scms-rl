@@ -22,10 +22,12 @@ $(document).ready(function() {
         }
     });
 
+    //iniciar folimanager
     $("#lfm").filemanager("image");
     $("#lfm2").filemanager("image");
 });
 
+// previsualizacion de las imagenes
 document.addEventListener(
     "readystatechange",
     evento => {
@@ -59,15 +61,7 @@ document.addEventListener(
     false
 );
 
-/*
-Template Name: Admin Template
-Author: Wrappixel
-
-File: js
-*/
-// ==============================================================
-// Auto select left navbar
-// ==============================================================
+//Sidebar==============================================================
 $(function() {
     ("use strict");
     var url = window.location + "";

@@ -2,7 +2,18 @@ import React, { useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import $ from "jquery";
 
+/**
+ *menu de navegacion
+ *
+ * @param {*} { title, categories, tags, reloadContent }
+ * @returns Component
+ */
 const NavBar = ({ title, categories, tags, reloadContent }) => {
+  /**
+   *Cambia el tema de la pagina
+   *
+   * @param {*} e
+   */
   const changeTheme = (e) => {
     $(".theme-icon").toggle();
     $("body").toggleClass("theme-dark");

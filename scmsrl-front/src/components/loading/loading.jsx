@@ -1,5 +1,12 @@
 import React from "react";
 
+/**
+ *se muestra como un indicio
+ *de carga de datos
+ *
+ * @param {*} { width, height }
+ * @returns Component
+ */
 const Loading = ({ width, height }) => {
   return (
     <div className="loading d-flex justify-content-center align-items-center position-relative">
