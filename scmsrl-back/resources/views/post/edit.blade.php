@@ -22,8 +22,8 @@
                         <x-error-message name="title" />
                     </div>
 
-                    <div class="col"><label for="titulo">slug<br></label><input name="slug"
-                            class="form-control @error('slug') is-invalid @enderror" value="{{ $post->slug }}"
+                    <div class="col"><label for="slug">slug<br></label><input name="slug"
+                           id="slug" class="form-control @error('slug') is-invalid @enderror" value="{{ $post->slug }}"
                             type="text">
                         <x-error-message name="slug" />
                     </div>
@@ -110,14 +110,14 @@
                             <legend class="h6">Estado</legend>
                             <div class="custom-control custom-radio">
                                 <input type="radio"
-                                    {{ $post->status=='publiced'?'checked="checked"':'' }}
+                                    {{ $post->status=='publiced'?'checked=checked':'' }}
                                     id="publiced" value="publiced" name="status"
                                     class="custom-control-input @error('status') is-invalid @enderror">
                                 <label class="custom-control-label" for="publiced">Publicar</label>
                             </div>
                             <div class="custom-control custom-radio">
                                 <input type="radio"
-                                    {{ $post->status=='draff'?'checked="checked"':'' }}
+                                    {{ $post->status=='draff'?'checked=checked':'' }}
                                     id="draff" name="status" value="draff" class="custom-control-input">
                                 <label class="custom-control-label @error('status') is-invalid @enderror"
                                     for="draff">Guardar
@@ -150,7 +150,7 @@
                             <legend class="h6">imagen de cabezera</legend>
                             <div class="form-row">
                                 <div class="col-md-4 pr-0">
-                                    <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                    <a href="#" id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
                                         <i class="fa fa-picture-o"></i> Cargar
                                     </a>
                                 </div>

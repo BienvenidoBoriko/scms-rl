@@ -38,7 +38,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Nombre</>
+                        <th>Nombre</th>
                         <th>Numero de entradas</th>
                         <th>Es Visible</th>
                         <th>Editar</th>

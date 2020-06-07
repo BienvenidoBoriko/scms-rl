@@ -17,7 +17,7 @@
                 <div class="form-row">
                     <div class="col"><label for="name">nombre<br></label><input
                             class="form-control @error('name') is-invalid @enderror" type="text"
-                            value="{{ $tag->name }}" id="name" name="name" id="titulo" required="required">
+                            value="{{ $tag->name }}" id="name" name="name" required="required">
                         <x-error-message name="name" />
                     </div>
                     <div class="col"><label for="slug">slug<br></label><input name="slug"
@@ -55,7 +55,7 @@
                             <legend class="h6">imagen de cabezera</legend>
                             <div class="form-row">
                                 <div class="col-md-4 pr-0">
-                                    <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                    <a href="#" id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
                                         <i class="fa fa-picture-o"></i> Cargar
                                     </a>
                                 </div>

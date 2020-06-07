@@ -53,7 +53,7 @@
                             <legend class="h6">imagen de cabezera</legend>
                             <div class="form-row">
                                 <div class="col-md-4 pr-0">
-                                    <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                    <a href="#" id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
                                         <i class="fa fa-picture-o"></i> Cargar
                                     </a>
                                 </div>

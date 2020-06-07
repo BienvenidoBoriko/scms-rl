@@ -76,7 +76,7 @@
                                 <div class="custom-control custom-checkbox custom-control-inline">
                                     @if( $loop->first)
                                         <input class="custom-control-input" id="{{ $tag->name }}" type="checkbox"
-                                            id="{{ $tag->name }}" checked="checked" name="tags[]"
+                                             checked="checked" name="tags[]"
                                             value="{{ $tag->id }}">
                                     @else
                                         <input class="custom-control-input" id="{{ $tag->name }}" type="checkbox"
@@ -148,7 +148,7 @@
                             <legend class="h6">imagen de cabezera</legend>
                             <div class="form-row">
                                 <div class="col-md-4 pr-0">
-                                    <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                    <a href="#" id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
                                         <i class="fa fa-picture-o"></i> Cargar
                                     </a>
                                 </div>

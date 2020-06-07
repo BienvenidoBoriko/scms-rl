@@ -16,7 +16,7 @@
                 <div class="form-row">
                     <div class="col col-sm-4 col-lg-3"><label for="name">Nombre<br></label><input id="name" name="name"
                             class="form-control @error('name') is-invalid @enderror"
-                            value="{{ old('name') }} " type="text" id="titulo" required="required">
+                            value="{{ old('name') }} " type="text" required="required">
                         <x-error-message name="name" />
                     </div>
                     <div class="col col-sm-4 col-lg-3"><label for="email">correo<br></label><input id="email"
@@ -33,7 +33,7 @@
                             name="rol_id" class="form-control @error('rol_id') is-invalid @enderror">
                             <optgroup label="Roles">
                                 @foreach($rols as $rol)
-                                    <option value="{{ $rol->id }}" selected="">{{ $rol->name }}</option>
+                                    <option value="{{ $rol->id }}" @if ($loop->first) selected="selected" @endif>{{ $rol->name }}</option>
                                 @endforeach
                             </optgroup>
                         </select>
@@ -47,8 +47,7 @@
                 </div>
             </div>
             <div class="form-group"><label for="bio">biografia<br></label><textarea name="bio"
-                    class="form-control @error('bio') is-invalid @enderror" value="{{ old('bio') }} "
-                    id="bio"></textarea>
+                    class="form-control @error('bio') is-invalid @enderror" id="bio">{{ old('bio') }}</textarea>
                 <x-error-message name="bio" />
             </div>
             <div class="form-group">
@@ -96,7 +95,7 @@
                             <legend class="h6">imagen de Usuario</legend>
                             <div class="form-row">
                                 <div class="col-md-4 pr-0">
-                                    <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                    <a href="#" id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
                                         <i class="fa fa-picture-o"></i> Cargar
                                     </a>
                                 </div>
@@ -116,7 +115,7 @@
                             <legend class="h6">imagen de cabecera</legend>
                             <div class="form-row">
                                 <div class="col-md-4 pr-0">
-                                    <a id="lfm2" data-input="thumbnail1" data-preview="holder1" class="btn btn-primary">
+                                    <a href="#" id="lfm2" data-input="thumbnail1" data-preview="holder1" class="btn btn-primary">
                                         <i class="fa fa-picture-o"></i> Cargar
                                     </a>
                                 </div>
@@ -126,7 +125,7 @@
                                     <x-error-message name="cover_img" />
                                 </div>
                             </div>
-                            <div id="holder" class="image-box text-center">
+                            <div id="holder1" class="image-box text-center">
                             </div>
                         </fieldset>
                     </div>

@@ -95,7 +95,7 @@
                                             <optgroup label="Roles">
                                                 @foreach($rols as $rol)
                                                     <option value="{{ $rol->id }}"
-                                                        selected="{{ $author->rol_id==$rol->id?'selected':'' }}">
+                                                        {{ $author->rol_id==$rol->id?'selected=selected':'' }}>
                                                         {{ $rol->name }}</option>
                                                 @endforeach
                                             </optgroup>
@@ -134,7 +134,7 @@
                                             <legend class="h6">Imagen de Usuario:</legend>
                                             <div class="form-row">
                                                 <div class="col-md-4 pr-0">
-                                                    <a id="lfm" data-input="thumbnail" data-preview="holder"
+                                                    <a href="#" id="lfm" data-input="thumbnail" data-preview="holder"
                                                         class="btn btn-primary">
                                                         <i class="fa fa-picture-o"></i> Cargar
                                                     </a>
@@ -156,7 +156,7 @@
                                             <legend class="h6">Imagen de Cabecera:</legend>
                                             <div class="form-row">
                                                 <div class="col-md-4 pr-0">
-                                                    <a id="lfm2" data-input="thumbnail1" data-preview="holder1"
+                                                    <a href="#" id="lfm2" data-input="thumbnail1" data-preview="holder1"
                                                         class="btn btn-primary">
                                                         <i class="fa fa-picture-o"></i> Cargar
                                                     </a>
