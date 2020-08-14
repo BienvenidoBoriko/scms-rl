@@ -1,10 +1,10 @@
-import config from "./config";
+import { API_URL, API_TOKEN } from "@env";
 
 export const getPosts = async () => {
-  return await fetch(`${config.apiUrl}posts`, {
+  return await fetch(`${API_URL}posts`, {
     method: "GET",
     headers: {
-      Authorization: "Bearer " + config.token,
+      Authorization: "Bearer " + API_TOKEN,
       "Content-type": "application/json",
     },
   }).then((res) => {
@@ -17,10 +17,10 @@ export const getPosts = async () => {
 };
 
 export const getPost = async (id) => {
-  return await fetch(`${config.apiUrl}posts/${id}`, {
+  return await fetch(`${API_URL}posts/${id}`, {
     method: "GET",
     headers: {
-      Authorization: "Bearer " + config.token,
+      Authorization: "Bearer " + API_TOKEN,
       "Content-type": "application/json",
     },
   }).then((res) => {
@@ -33,10 +33,10 @@ export const getPost = async (id) => {
 };
 
 export const getTags = async () => {
-  return await fetch(`${config.apiUrl}tags`, {
+  return await fetch(`${API_URL}tags`, {
     method: "GET",
     headers: {
-      Authorization: "Bearer " + config.token,
+      Authorization: "Bearer " + API_TOKEN,
       "Content-type": "application/json",
     },
   }).then((res) => {
@@ -49,10 +49,10 @@ export const getTags = async () => {
 };
 
 export const getTag = async (id) => {
-  return await fetch(`${config.apiUrl}tags/${id}`, {
+  return await fetch(`${API_URL}tags/${id}`, {
     method: "GET",
     headers: {
-      Authorization: "Bearer " + config.token,
+      Authorization: "Bearer " + API_TOKEN,
       "Content-type": "application/json",
     },
   }).then((res) => {
@@ -65,10 +65,10 @@ export const getTag = async (id) => {
 };
 
 export const getCategories = async () => {
-  return await fetch(`${config.apiUrl}categories`, {
+  return await fetch(`${API_URL}categories`, {
     method: "GET",
     headers: {
-      Authorization: "Bearer " + config.token,
+      Authorization: "Bearer " + API_TOKEN,
       "Content-type": "application/json",
     },
   }).then((res) => {
@@ -81,10 +81,10 @@ export const getCategories = async () => {
 };
 
 export const getCategory = async (id) => {
-  return await fetch(`${config.apiUrl}categories/${id}`, {
+  return await fetch(`${API_URL}categories/${id}`, {
     method: "GET",
     headers: {
-      Authorization: "Bearer " + config.token,
+      Authorization: "Bearer " + API_TOKEN,
       "Content-type": "application/json",
     },
   }).then((res) => {
@@ -97,10 +97,10 @@ export const getCategory = async (id) => {
 };
 
 export const getSettings = async () => {
-  return await fetch(`${config.apiUrl}settings`, {
+  return await fetch(`${API_URL}settings`, {
     method: "GET",
     headers: {
-      Authorization: "Bearer " + config.token,
+      Authorization: "Bearer " + API_TOKEN,
       "Content-type": "application/json",
     },
   }).then((res) => {
@@ -113,10 +113,10 @@ export const getSettings = async () => {
 };
 
 export const getSetting = async (id) => {
-  return await fetch(`${config.apiUrl}settings/${id}`, {
+  return await fetch(`${API_URL}settings/${id}`, {
     method: "GET",
     headers: {
-      Authorization: "Bearer " + config.token,
+      Authorization: "Bearer " + API_TOKEN,
       "Content-type": "application/json",
     },
   }).then((res) => {
@@ -129,10 +129,10 @@ export const getSetting = async (id) => {
 };
 
 export const getUser = async (id) => {
-  return await fetch(`${config.apiUrl}users/${id}`, {
+  return await fetch(`${API_URL}users/${id}`, {
     method: "GET",
     headers: {
-      Authorization: "Bearer " + config.token,
+      Authorization: "Bearer " + API_TOKEN,
       "Content-type": "application/json",
     },
   }).then((res) => {

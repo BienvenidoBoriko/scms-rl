@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import $ from "jquery";
-import { getPosts, getCategories, getSettings, getTags } from "./utils/peticiones";
+import {
+  getPosts,
+  getCategories,
+  getSettings,
+  getTags,
+} from "./utils/peticiones";
 import "./sass/App.scss";
 import Home from "./views/Home/Home";
 import Tag from "./views/Tag/Tag";
@@ -53,16 +58,42 @@ function App() {
       return (
         <div className="App container-fluid">
           <Router>
-            <NavBar title={data.settings[0].value} categories={data.categories} tags={data.tags} reloadContent={reloadContent} />
+            <NavBar
+              title={data.settings[0].value}
+              categories={data.categories}
+              tags={data.tags}
+              reloadContent={reloadContent}
+            />
 
             <Switch>
-              <Route exact path="/" render={(props) => <Home settings={data.settings} tags={data.tags} posts={data.posts} categories={data.categories} />} />
+              <Route
+                exact
+                path="/"
+                render={(props) => (
+                  <Home
+                    settings={data.settings}
+                    tags={data.tags}
+                    posts={data.posts}
+                    categories={data.categories}
+                  />
+                )}
+              />
 
-              <Route path="/tags/:id" render={(props) => <Tag tags={data.tags} />} />
-              <Route path="/categories/:id" render={(props) => <Category categories={data.categories} />} />
+              <Route
+                path="/tags/:id"
+                render={(props) => <Tag tags={data.tags} />}
+              />
+              <Route
+                path="/categories/:id"
+                render={(props) => <Category categories={data.categories} />}
+              />
               <Route path="/posts/:id" component={Post} />
             </Switch>
-            <Footer categories={data.categories} tags={data.tags} settings={data.settings} />
+            <Footer
+              categories={data.categories}
+              tags={data.tags}
+              settings={data.settings}
+            />
           </Router>
         </div>
       );

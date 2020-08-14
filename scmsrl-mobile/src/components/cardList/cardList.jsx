@@ -1,6 +1,12 @@
 import React from "react";
 import Card from "./../card/card";
-import { StyleSheet, Text, SectionList, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  SectionList,
+  View,
+  TouchableOpacity,
+} from "react-native";
 
 /**
  *crea un grupos de posts
@@ -11,13 +17,16 @@ import { StyleSheet, Text, SectionList, View } from "react-native";
  * @param {*} { posts, title }
  * @returns Component
  */
-const CardList = ({ posts, title }) => {
+const CardList = ({ data }) => {
   const styles = StyleSheet.create({
     container: {
       width: "100%",
     },
     contentContainer: {
       flexGrow: 1,
+    },
+    center: {
+      alignItems: "center",
     },
     listItem: {
       margin: 5,
@@ -72,32 +81,37 @@ const CardList = ({ posts, title }) => {
   });
   const renderItem = (post) => {
     return (
-      <Card
-        img={post.featured_img}
-        title={post.title}
-        desc={post.custom_except}
-        id={post.id}
-      />
+      <TouchableOpacity style={styles.listItem} key={post.id}>
+        <Card
+          img={post.featured_img}
+          title={post.title}
+          desc={post.custom_except}
+          id={post.id}
+        />
+      </TouchableOpacity>
     );
   };
+
   const renderSeparator = () => {
     return <View style={styles.separator} />;
   };
 
-  const renderEmptyComponent = () => (
-    <View style={styles.emptyList}>
-      <Text>Lista Vacia</Text>
-    </View>
-  );
+  const renderEmptyComponent = () => {
+    return (
+      <View style={styles.emptyList}>
+        <Text>Lista Vacia</Text>
+      </View>
+    );
+  };
   return (
-    <View>
-      <SectionList
-        style={styles.container}
-        sections={posts}
-        keyExtractor={(post, index) => post + index}
-        renderItem={({ item }) => renderItem(item)}
-        renderSectionHeader={() => {
-          return (
+    <SectionList
+      style={styles.container}
+      sections={data}
+      keyExtractor={(item, index) => item.name + index}
+      renderItem={({ item }) => renderItem(item)}
+      renderSectionHeader={({ section: { title } }) => {
+        return (
+          <View>
             <Text style={styles.text}>
               {title !== null ? (
                 <Text style={{ "font-size": "30px" }}>{title}</Text>
@@ -105,13 +119,13 @@ const CardList = ({ posts, title }) => {
                 ""
               )}
             </Text>
-          );
-        }}
-        ItemSeparatorComponent={renderSeparator}
-        ListEmptyComponent={renderEmptyComponent}
-        stickySectionHeadersEnabled={true}
-      />
-    </View>
+          </View>
+        );
+      }}
+      ItemSeparatorComponent={renderSeparator}
+      ListEmptyComponent={renderEmptyComponent}
+      stickySectionHeadersEnabled={true}
+    />
   );
 };
 
